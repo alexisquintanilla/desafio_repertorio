@@ -38,11 +38,17 @@ function nuevaCancion() {
     cancion;
     artista;
     tono;
+
     let data = {
         titulo: cancion.value,
         artista: artista.value,
         tono: tono.value,
     };
+
+    if (!cancion.value.trim() || !artista.value.trim() || !tono.value.trim()) {
+        alert('Debe de rellenar todos los campos')
+        return
+    }
 
     axios.post(url, data).then(() => getData());
 }
@@ -67,6 +73,11 @@ function prepararCancion(i, id) {
 }
 
 function editarCancion(id) {
+
+    if (!cancion.value.trim() || !artista.value.trim() || !tono.value.trim()) {
+        alert('Debe de rellenar todos los campos')
+        return
+    }
     axios
         .put(url + "/" + id, {
             titulo: cancion.value,

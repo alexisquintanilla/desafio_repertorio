@@ -1,5 +1,6 @@
 import { CancionesModel } from "../models/cancion.model.js";
 
+// funcion para crear json con todas las canciones
 export const getAllCanciones = async (req, res) => {
     try {
         const canciones = await CancionesModel.getSong()
@@ -12,6 +13,11 @@ export const getAllCanciones = async (req, res) => {
 export const postCanciones = async (req, res) => {
     try {
         const { titulo, artista, tono } = req.body
+
+        if (!titulo.trim() || !artista.trim() || !tono.trim()) {
+            return res.json({ ok: false, msg: 'Debe de rellenar todos los campos' })
+        }
+
         const newCancion = {
             titulo,
             artista,
@@ -42,6 +48,10 @@ export const putCancion = async (req, res) => {
     try {
         const { id } = req.params
         const { titulo, artista, tono } = req.body
+
+        if (!titulo.trim() || !artista.trim() || !tono.trim()) {
+            return res.json({ ok: false, msg: 'Debe de rellenar todos los campos' })
+        }
 
         const updateCancion = {
             id,

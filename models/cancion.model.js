@@ -1,10 +1,12 @@
 import { pool } from '../database/connection.js'
 
+// query para consultar todas las canciones
+
 const getSong = async () => {
     const { rows } = await pool.query('SELECT * FROM CANCIONES')
     return rows
 }
-
+//query para crear cargar una cancion en la tabla canciones
 const createCanciones = async ({ titulo, artista, tono }) => {
     const query = {
         text: `
@@ -18,7 +20,7 @@ const createCanciones = async ({ titulo, artista, tono }) => {
     const { rows } = await pool.query(query)
     return rows[0]
 }
-
+// eliminar una cancion de tabla canciones
 const deleteCancion = async (id) => {
     const query = {
         text: `
@@ -31,6 +33,7 @@ const deleteCancion = async (id) => {
 
 }
 
+// actualizar tabla canciones
 const updateCancion = async (cancion) => {
     const query = {
         text: `UPDATE CANCIONES
@@ -42,6 +45,7 @@ const updateCancion = async (cancion) => {
     return rows[0]
 }
 
+// exportaciones de funciones models
 export const CancionesModel = {
     getSong,
     createCanciones,
